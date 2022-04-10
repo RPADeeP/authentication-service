@@ -17,7 +17,6 @@ repositories {
 }
 
 dependencies {
-
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -27,11 +26,11 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.data:spring-data-mongodb")
 	implementation("org.mongodb:mongodb-driver-sync")
-/*	implementation("org.springframework.boot:spring-boot-starter-security")*/
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation(enforcedPlatform("org.springframework.boot:spring-boot-dependencies:2.6.6"))
 	implementation(enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:2021.0.1"))
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-/*	testImplementation("org.springframework.security:spring-security-test")*/
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<KotlinCompile> {

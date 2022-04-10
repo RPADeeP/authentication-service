@@ -8,3 +8,4 @@ spring:
   data.mongodb.uri: mongodb+srv://RPADeeP_BPM:2AM6KD0KRASFHH3533P6e6PMRPA@clusterbpm.hi2gq.mongodb.net/RPADeeP_BPM
   config:
     import: optional:configserver:http://localhost:8888
+  #TODO: migrate properties to config server
