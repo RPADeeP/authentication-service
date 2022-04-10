@@ -4,14 +4,13 @@ import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collection = "user")
-data class User (
+@Document(collection = "USER")
+open class User (
     var firstName: String,
     var lastName: String,
-    var middleName: String,
-    var password: String
-) {
+    var middleName: String
+        ) {
     @Id
     var id: ObjectId = ObjectId.get()
-    var code: String = ""
+    lateinit var code: String
 }

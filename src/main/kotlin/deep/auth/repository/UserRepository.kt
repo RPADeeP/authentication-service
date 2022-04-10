@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UserRepository : MongoRepository<User, Int> {
-    fun findByCodeAndPassword(code: String, password: String) : User?
 }
