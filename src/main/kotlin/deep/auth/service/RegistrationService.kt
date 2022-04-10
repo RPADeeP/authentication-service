@@ -27,6 +27,7 @@ class RegistrationServiceImpl (
             userDTO.password
         )
         userDetails.codeCreating(user.id)
+        user.code = userDetails.code
 
         userRepository.save(user)
         userAuthDetailsRepository.save(userDetails)
