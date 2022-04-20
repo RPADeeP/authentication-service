@@ -8,7 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 open class User (
     var firstName: String,
     var lastName: String,
-    var middleName: String
+    var middleName: String,
+    var companyToken: String? = ""
         ) {
     @Id
     var id: ObjectId = ObjectId.get()

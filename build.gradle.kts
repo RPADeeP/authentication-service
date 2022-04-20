@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -26,7 +27,8 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	implementation("org.springframework.data:spring-data-mongodb")
 	implementation("org.mongodb:mongodb-driver-sync")
-	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+	implementation("com.auth0:java-jwt:3.19.1")
 	implementation(enforcedPlatform("org.springframework.boot:spring-boot-dependencies:2.6.6"))
 	implementation(enforcedPlatform("org.springframework.cloud:spring-cloud-dependencies:2021.0.1"))
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

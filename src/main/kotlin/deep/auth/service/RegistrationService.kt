@@ -8,15 +8,16 @@ import deep.auth.repository.UserRepository
 import org.springframework.stereotype.Service
 
 interface RegistrationService {
-    fun registration(userDTO: UserRegistryDTO)
+    fun registration(userDTO: UserRegistryDTO): String
 }
 
 @Service
 class RegistrationServiceImpl (
     val userAuthDetailsRepository: UserAuthDetailsRepository,
+    val tokenService: TokenService,
     val userRepository: UserRepository
     ) : RegistrationService {
-    override fun registration(userDTO: UserRegistryDTO) {
+    override fun registration(userDTO: UserRegistryDTO): String {
         val user = User(
             userDTO.firstName,
             userDTO.lastName,
@@ -31,5 +32,6 @@ class RegistrationServiceImpl (
 
         userRepository.save(user)
         userAuthDetailsRepository.save(userDetails)
+        return tokenService.generateToken(userDetails)
     }
 }

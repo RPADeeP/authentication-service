@@ -1,11 +1,13 @@
 server.port: 8080
+spring.application.name: authentication-service
+
 eureka:
   client:
     service-url.default-zone: http://localhost:8761/eureka
 
 spring:
-  application.name: authentication-service
-  data.mongodb.uri: mongodb+srv://RPADeeP_BPM:2AM6KD0KRASFHH3533P6e6PMRPA@clusterbpm.hi2gq.mongodb.net/RPADeeP_BPM
   config:
-    import: optional:configserver:http://localhost:8888
-  #TODO: migrate properties to config server
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
