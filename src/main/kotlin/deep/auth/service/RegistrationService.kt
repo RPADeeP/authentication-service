@@ -27,7 +27,6 @@ class RegistrationServiceImpl (
         val userDetails = UserAuthDetails(
             userDTO.password
         )
-        userDetails.codeCreating(user.id)
         user.code = userDetails.code
 
         userRepository.save(user)

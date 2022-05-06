@@ -11,10 +11,5 @@ class UserAuthDetails (
 {
     @Id
     var id: ObjectId = ObjectId.get()
-    lateinit var code: String
-
-    fun codeCreating(userID: ObjectId) {
-        code = "$id".replace("[a-zA-Z]".toRegex(), "").substring(4,6) +
-                "$userID".replace("[a-zA-Z]".toRegex(), "").substring(6,9)
-    }
+    var code: String = "$id".replace("[a-zA-Z]".toRegex(), "").substring(6,9) + repeat(3){('0'..'9').random()}
 }
