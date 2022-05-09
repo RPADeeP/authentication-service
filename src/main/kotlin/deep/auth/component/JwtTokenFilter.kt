@@ -29,7 +29,7 @@ class JwtTokenFilter(
             return
         }
 
-        val authDetails = tokenService.parseToken(tokenService.getTokenFromAuth(header))
+        val authDetails = tokenService.parseToken(tokenService.getTokenFromAuth(header), "UserAuth")
 
         if(authDetails == null) {
             filterChain.doFilter(request, response)

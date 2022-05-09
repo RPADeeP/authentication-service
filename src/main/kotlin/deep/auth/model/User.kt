@@ -9,8 +9,8 @@ open class User (
     var firstName: String,
     var lastName: String,
     var middleName: String,
-    var companyToken: String? = ""
-        ) {
+    var companyToken: String = ""
+        ) : BaseUser {
     @Id
     var id: ObjectId = ObjectId.get()
     lateinit var code: String

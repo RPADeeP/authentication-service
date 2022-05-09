@@ -1,5 +1,6 @@
 package deep.auth.controller
 
+import deep.auth.model.UserAuthDetails
 import deep.auth.service.TokenService
 import org.springframework.http.HttpHeaders
 import org.springframework.web.bind.annotation.GetMapping
@@ -15,6 +16,6 @@ class TokenController(
 
     @GetMapping(path=["/authenticate"])
     fun authenticate(request: HttpServletRequest) : String {
-        return tokenService.parseToken(tokenService.getTokenFromAuth(request.getHeader(HttpHeaders.AUTHORIZATION)))?.code ?: ""
+        return (tokenService.parseToken(tokenService.getTokenFromAuth(request.getHeader(HttpHeaders.AUTHORIZATION)), "UserAuth") as UserAuthDetails?)?.code ?: ""
     }
 }

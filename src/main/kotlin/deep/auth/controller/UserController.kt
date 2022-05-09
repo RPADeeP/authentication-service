@@ -1,5 +1,6 @@
 package deep.auth.controller
 
+import deep.auth.model.User
 import deep.auth.service.TokenService
 import deep.auth.service.UserService
 import org.springframework.http.HttpHeaders
@@ -16,8 +17,18 @@ class UserController(
     @GetMapping(path = ["/add-token/{token}"])
     fun addCompanyTokenToUser(@PathVariable token: String, request: HttpServletRequest){
         userService.addCompanyTokenToUser(token,
-            tokenService.parseToken(tokenService.getTokenFromAuth(request.getHeader(HttpHeaders.AUTHORIZATION)))?.code
-                ?: ""
+            tokenService.parseToken(tokenService.getTokenFromAuth(request.getHeader(HttpHeaders.AUTHORIZATION)), "User") as User
         )
     }
+
+    @GetMapping(path = ["/get-one"])
+    fun getUser(request: HttpServletRequest) : User {
+        return tokenService.parseToken(tokenService.getTokenFromAuth(request.getHeader(HttpHeaders.AUTHORIZATION)), "User") as User
+    }
+
+    @GetMapping(path = ["/get-all/{token}"])
+    fun getUser(@PathVariable token: String) : List<User> {
+        return userService.getAllUsersForCompany(token)
+    }
+
 }
