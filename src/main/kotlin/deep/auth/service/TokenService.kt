@@ -25,8 +25,8 @@ interface TokenService {
 
 @Service
 class TokenServiceImpl(
-    val userAuthDetailsRepository: UserAuthDetailsRepository,
-    val userRepository: UserRepository
+    private val userAuthDetailsRepository: UserAuthDetailsRepository,
+    private val userRepository: UserRepository
 ) : TokenService{
 
     @Value("\${app.security.jwt.secret}")
@@ -38,7 +38,7 @@ class TokenServiceImpl(
             .withClaim("userId", user.id.toString())
             .withSubject(userAuthDetails.code)
             .withNotBefore(Date())
-            .withExpiresAt(DateUtils.addMinutes(Date(),30))
+            .withExpiresAt(DateUtils.addDays(Date(),1))
             .sign(Algorithm.HMAC256(jwtSecret))
     }
 

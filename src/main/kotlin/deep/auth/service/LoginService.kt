@@ -17,9 +17,9 @@ interface LoginService {
 
 @Service
 class LoginServiceImpl(
-    val userAuthDetailsRepository: UserAuthDetailsRepository,
-    val userRepository: UserRepository,
-    val tokenService: TokenService
+    private val userAuthDetailsRepository: UserAuthDetailsRepository,
+    private val userRepository: UserRepository,
+    private val tokenService: TokenService
 ) : LoginService {
     override fun login(userLoginDTO: UserLoginDTO) : TokenCallBack {
         val userAuthDetails : UserAuthDetails?

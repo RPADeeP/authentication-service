@@ -5,5 +5,6 @@ data class UserRegistryDTO(
     var lastName: String,
     var middleName: String,
     var password: String,
-    var companyToken: String = ""
+    var companyToken: String = "",
+    var companyName: String
 )

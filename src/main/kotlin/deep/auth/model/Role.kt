@@ -4,15 +4,15 @@ import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document(collection = "USER")
-class User(
-    var firstName: String,
-    var lastName: String,
-    var middleName: String,
+@Document(collection = "ROLE")
+class Role (
+    var name: String,
+    var isGeneralStatisticAvailable: Boolean,
+    var isProcessCreatorAvailable: Boolean,
+    var isJiraAvailable: Boolean,
+    var isAddingStaffAvailable: Boolean,
     var companyToken: String = ""
-) : BaseUser {
+        ) {
     @Id
     var id: ObjectId = ObjectId.get()
-    lateinit var code: String
-    lateinit var role: Role
 }
