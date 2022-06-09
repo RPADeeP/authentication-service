@@ -12,7 +12,8 @@ class User(
     var companyToken: String = ""
 ) : BaseUser {
     @Id
-    var id: ObjectId = ObjectId.get()
+    var id: String = ObjectId.get().toString()
     lateinit var code: String
     lateinit var role: Role
+    var department: Department? = null
 }

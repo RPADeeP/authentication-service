@@ -1,4 +1,4 @@
-package deep.auth.component.restTemplate
+package deep.auth.component.config
 
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean

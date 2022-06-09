@@ -34,8 +34,8 @@ class TokenServiceImpl(
 
     override fun generateToken(userAuthDetails: UserAuthDetails, user: User): String {
         return JWT.create()
-            .withClaim("authId", userAuthDetails.id.toString())
-            .withClaim("userId", user.id.toString())
+            .withClaim("authId", userAuthDetails.id)
+            .withClaim("userId", user.id)
             .withSubject(userAuthDetails.code)
             .withNotBefore(Date())
             .withExpiresAt(DateUtils.addDays(Date(),1))
@@ -48,15 +48,13 @@ class TokenServiceImpl(
                 return null
 
             if(StringUtils.equals(type, "UserAuth"))
-            return userAuthDetailsRepository.findByIdAndCode(
-                ObjectId(JWT.decode(token).claims["authId"]?.asString() ?: ""),
-                JWT.decode(token).subject as String
+            return userAuthDetailsRepository.findById(
+                JWT.decode(token).claims["authId"]?.asString() ?: "",
             )
 
             if(StringUtils.equals(type, "User"))
-            return userRepository.findByIdAndCode(
-                ObjectId(JWT.decode(token).claims["userId"]?.asString() ?: ""),
-                JWT.decode(token).subject as String
+            return userRepository.findById(
+                JWT.decode(token).claims["userId"]?.asString() ?: "",
             )
 
             return null

@@ -22,14 +22,8 @@ class LoginServiceImpl(
     private val tokenService: TokenService
 ) : LoginService {
     override fun login(userLoginDTO: UserLoginDTO) : TokenCallBack {
-        val userAuthDetails : UserAuthDetails?
-        val user : User?
-        try {
-            userAuthDetails = userAuthDetailsRepository.findByCodeAndPassword(userLoginDTO.code, userLoginDTO.password)
-            user = userRepository.findByCode(userLoginDTO.code)
-        } catch (e: EmptyResultDataAccessException) {
-            throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found")
-        }
+        val userAuthDetails = userAuthDetailsRepository.findByCodeAndPassword(userLoginDTO.code, userLoginDTO.password) ?:  throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found")
+        val user = userRepository.findById(userAuthDetails.id) ?:  throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found")
         return TokenCallBack(
             tokenService.generateToken(userAuthDetails, user),
             user.companyToken

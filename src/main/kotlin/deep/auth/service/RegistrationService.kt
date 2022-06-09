@@ -27,12 +27,9 @@ class RegistrationServiceImpl (
     private val tokenService: TokenService,
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
-    private val restTemplate: RestTemplate
+    private val restTemplate: RestTemplate,
+    private val departmentServiceUrl: String
     ) : RegistrationService {
-
-    @Value("\${app.company-create.url}")
-    private lateinit var companyCreateUrl: String
-
     override fun registration(userDTO: UserRegistryDTO): TokenCallBack {
         val user = User(
             userDTO.firstName,
@@ -42,6 +39,7 @@ class RegistrationServiceImpl (
         )
 
         val userDetails = UserAuthDetails(
+            user.id,
             userDTO.password
         )
 
@@ -57,7 +55,7 @@ class RegistrationServiceImpl (
             val requestEntity: HttpEntity<CompanyCreateDTO> = HttpEntity(CompanyCreateDTO(userDTO.companyName), headers)
 
             try {
-                val entity = restTemplate.exchange("$companyCreateUrl/company/create", HttpMethod.POST, requestEntity, String::class.java)
+                val entity = restTemplate.exchange("$departmentServiceUrl/company/create", HttpMethod.POST, requestEntity, String::class.java)
                 if(entity.statusCodeValue == 200)
                     user.companyToken = entity.body.toString()
                 else
